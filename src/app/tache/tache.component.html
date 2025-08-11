@@ -1,0 +1,7 @@
+<h2>📋 Liste des tâches</h2>
+<ul>
+  <li *ngFor="let t of tasks">
+    <input type="checkbox" [checked]="t.termine">
+    {{ t.titre }}
+  </li>
+</ul>
