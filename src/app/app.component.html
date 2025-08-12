@@ -1,11 +1,18 @@
-<!-- app.component.html -->
-<h1>🗂 Gestionnaire de tâches</h1>
-<p>Bienvenue sur votre gestionnaire de tâches Angular !</p>
-<nav>
-  <a routerLink="/taches" routerLinkActive="active">Tâches</a> |
-  <a routerLink="/apropos" routerLinkActive="active">À propos</a>
-</nav>
+<div class="app-container">
+  <header class="app-header">
+    <h1>🗂 Gestionnaire de tâches</h1>
+    <p>Bienvenue sur votre gestionnaire de tâches Angular !</p>
+  </header>
+  
+  <nav class="app-nav">
+    <a routerLink="/taches" routerLinkActive="active">📋 Tâches</a>
+    <a routerLink="/ajouter-tache" routerLinkActive="active">➕ Ajouter une tâche</a>
+    <a routerLink="/apropos" routerLinkActive="active">ℹ️ À propos</a>
+  </nav>
 
-<hr />
-
-<router-outlet></router-outlet>
+  <main class="app-content">
+    <div class="content-wrapper">
+      <router-outlet></router-outlet>
+    </div>
+  </main>
+</div>

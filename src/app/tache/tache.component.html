@@ -1,7 +1,50 @@
-<h2>📋 Liste des tâches</h2>
-<ul>
-  <li *ngFor="let t of tasks">
-    <input type="checkbox" [checked]="t.termine">
-    {{ t.titre }}
+<div class="task-header">
+  <h2>📋 Liste des tâches</h2>
+</div>
+
+<div class="task-stats" *ngIf="tasks.length > 0">
+  <div class="stat-card">
+    <span class="stat-number">{{ getTotalTasks() }}</span>
+    <span class="stat-label">Total</span>
+  </div>
+  <div class="stat-card">
+    <span class="stat-number">{{ getCompletedTasks() }}</span>
+    <span class="stat-label">Terminées</span>
+  </div>
+  <div class="stat-card">
+    <span class="stat-number">{{ getPendingTasks() }}</span>
+    <span class="stat-label">En cours</span>
+  </div>
+</div>
+
+<div *ngIf="tasks.length === 0" class="no-tasks">
+  <div class="no-tasks-icon">📝</div>
+  <p>Aucune tâche trouvée pour le moment.</p>
+  <a routerLink="/ajouter-tache">
+    ➕ Créer votre première tâche
+  </a>
+</div>
+
+<ul *ngIf="tasks.length > 0" class="task-list">
+  <li *ngFor="let t of tasks; trackBy: trackByTaskId" 
+      class="task-item" 
+      [class.completed]="t.termine">
+    <input 
+      type="checkbox" 
+      class="task-checkbox"
+      [checked]="t.termine"
+      (change)="toggleTask(t.id)">
+    <span class="task-text">{{ t.titre }}</span>
+    <div class="task-actions">
+      <button (click)="deleteTask(t.id)" class="delete-btn" title="Supprimer la tâche">
+        🗑️
+      </button>
+    </div>
   </li>
 </ul>
+
+<div class="add-task-float">
+  <a routerLink="/ajouter-tache" title="Ajouter une nouvelle tâche">
+    ➕
+  </a>
+</div>

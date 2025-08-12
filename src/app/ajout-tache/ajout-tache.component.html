@@ -1,0 +1,40 @@
+<div class="add-task-container">
+  <a routerLink="/taches" class="back-link">
+    ← Retour à la liste
+  </a>
+  
+  <div class="page-header">
+    <h2>➕ Ajouter une nouvelle tâche</h2>
+    <p>Créez une nouvelle tâche pour rester organisé</p>
+  </div>
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" class="add-task-form">
+    <div class="form-group">
+      <label for="titre">Titre de la tâche *</label>
+      <input 
+        id="titre" 
+        type="text"
+        formControlName="titre"
+        placeholder="Ex: Faire les courses, Terminer le projet..."
+        [class.error]="form.controls['titre'].invalid && form.controls['titre'].touched">
+      
+      <div *ngIf="form.controls['titre'].invalid && form.controls['titre'].touched" class="error-messages">
+        <small *ngIf="form.controls['titre'].errors?.['required']">
+          📝 Le titre de la tâche est requis
+        </small>
+        <small *ngIf="form.controls['titre'].errors?.['minlength']">
+          ✏️ Le titre doit contenir au moins 3 caractères
+        </small>
+      </div>
+    </div>
+
+    <div class="form-actions">
+      <button type="button" class="btn btn-secondary" routerLink="/taches">
+        ❌ Annuler
+      </button>
+      <button type="submit" class="btn btn-primary" [disabled]="form.invalid">
+        ✅ Ajouter la tâche
+      </button>
+    </div>
+  </form>
+</div>
