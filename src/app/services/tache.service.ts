@@ -6,11 +6,13 @@ export interface Tache {
   id: number;
   titre: string;
   termine: boolean;
+  statut: string;
 }
 
 export interface NouvelletTache {
   titre: string;
   termine: boolean;
+  statut: string;
 }
 
 @Injectable({ providedIn: 'root' })

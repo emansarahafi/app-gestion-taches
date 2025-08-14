@@ -1,21 +1,27 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Router, RouterLink } from '@angular/router';
+import { Router } from '@angular/router';
 import { TacheService, Tache } from '../services/tache.service';
+import { AjoutTacheComponent } from '../ajout-tache/ajout-tache.component';
 
 @Component({
   selector: 'app-tache',
   standalone: true,
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule, AjoutTacheComponent],
   templateUrl: './tache.component.html',
   styleUrls: ['./tache.component.scss']
 })
 export class TacheComponent implements OnInit {
   tasks: Tache[] = [];
+  afficherFormulaire = false;
 
   constructor(private tacheService: TacheService, private router: Router) {}
 
   ngOnInit() {
+    this.loadTasks();
+  }
+
+  loadTasks() {
     this.tacheService.getTaches().subscribe({
       next: (data) => this.tasks = data,
       error: (err) => console.error('Erreur API', err)

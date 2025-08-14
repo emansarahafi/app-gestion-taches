@@ -28,7 +28,8 @@ export class AjoutTacheComponent {
       const titre = this.form.value.titre;
       const nouvelleTache = {
         titre: titre,
-        termine: false
+        termine: false,
+        statut: 'en_attente'
       };
       
       this.tacheService.ajouterTache(nouvelleTache).subscribe({
