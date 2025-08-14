@@ -16,7 +16,10 @@ export class TacheComponent implements OnInit {
   constructor(private tacheService: TacheService, private router: Router) {}
 
   ngOnInit() {
-    this.tasks = this.tacheService.getTasks();
+    this.tacheService.getTaches().subscribe({
+      next: (data) => this.tasks = data,
+      error: (err) => console.error('Erreur API', err)
+    });
   }
   
   goToTaskDetail(id: number) {
@@ -24,12 +27,27 @@ export class TacheComponent implements OnInit {
   }
 
   toggleTask(id: number) {
-    this.tacheService.toggleTask(id);
+    const task = this.tasks.find(t => t.id === id);
+    if (task) {
+      task.termine = !task.termine;
+      this.tacheService.modifierTache(task).subscribe({
+        next: () => this.ngOnInit(),
+        error: (err) => console.error('Erreur lors de la modification :', err)
+      });
+    }
   }
 
   deleteTask(id: number) {
-    this.tacheService.deleteTask(id);
-    this.tasks = this.tacheService.getTasks(); // Refresh the list
+    this.tacheService.supprimerTache(id).subscribe({
+      next: () => this.ngOnInit(),
+      error: (err) => console.error('Erreur lors de la suppression :', err)
+    });
+  }
+
+  supprimer(id: number) {
+    this.tacheService.supprimerTache(id).subscribe(() => {
+      this.tasks = this.tasks.filter(t => t.id !== id);
+    });
   }
 
   // Statistics methods

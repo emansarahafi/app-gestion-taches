@@ -26,11 +26,20 @@ export class AjoutTacheComponent {
   onSubmit() {
     if (this.form.valid) {
       const titre = this.form.value.titre;
-      this.tacheService.addTask(titre);
-      console.log('Tâche ajoutée:', titre);
-      this.form.reset();
-      // Navigate back to tasks list
-      this.router.navigate(['/taches']);
+      const nouvelleTache = {
+        titre: titre,
+        termine: false
+      };
+      
+      this.tacheService.ajouterTache(nouvelleTache).subscribe({
+        next: (tache) => {
+          console.log('Tâche ajoutée:', tache);
+          this.form.reset();
+          // Navigate back to tasks list
+          this.router.navigate(['/taches']);
+        },
+        error: (err) => console.error('Erreur lors de l\'ajout :', err)
+      });
     }
   }
 }
