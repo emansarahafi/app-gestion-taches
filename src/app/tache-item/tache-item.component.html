@@ -1,0 +1,26 @@
+<li [class]="tache.statut" [class.completed]="tache.termine">
+  <div class="task-content">
+    <input 
+      type="checkbox" 
+      [checked]="tache.termine" 
+      (change)="toggleTask()"
+      class="task-checkbox"
+      [id]="'task-' + tache.id">
+    <label [for]="'task-' + tache.id" class="task-text">{{ tache.titre }}</label>
+    <div class="task-status">
+      <select 
+        *ngIf="!tache.termine"
+        [value]="tache.statut" 
+        (change)="onStatusChange($event)"
+        class="status-select"
+        title="Changer le statut">
+        <option value="en_attente">⏳ En attente</option>
+        <option value="en_cours">🔄 En cours</option>
+      </select>
+      <span *ngIf="tache.termine" class="completed-status">✔️ Terminée</span>
+    </div>
+  </div>
+  <button (click)="supprimerTache()" title="Supprimer la tâche">
+    🗑
+  </button>
+</li>

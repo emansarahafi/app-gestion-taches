@@ -34,24 +34,12 @@
   </button>
 </div>
 
-<ul *ngIf="tasks.length > 0" class="task-list">
-  <li *ngFor="let t of tasks; trackBy: trackByTaskId" 
-      class="task-item" 
-      [class.completed]="t.termine">
-    <div class="task-content">
-      <span class="task-text">{{ t.titre }}</span>
-      <div class="task-status">
-        <span class="status-icon" [ngSwitch]="t.statut">
-          <span *ngSwitchCase="'terminee'">✔️</span>
-          <span *ngSwitchCase="'en_attente'">⏳</span>
-          <span *ngSwitchDefault>❓</span>
-        </span>
-      </div>
-    </div>
-    <div class="task-actions">
-      <button (click)="supprimer(t.id)" class="delete-btn" title="Supprimer la tâche">
-        🗑
-      </button>
-    </div>
-  </li>
-</ul>
+<div *ngIf="tasks.length > 0" class="task-list">
+  <app-tache-item 
+    *ngFor="let t of tasks" 
+    [tache]="t" 
+    (supprimer)="supprimer($event)"
+    (toggle)="toggleTask($event)"
+    (statusChange)="updateTaskStatus($event)">
+  </app-tache-item>
+</div>
