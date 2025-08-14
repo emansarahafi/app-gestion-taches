@@ -9,10 +9,10 @@ Créer un fichier `db.json` avec :
 ```json
 {
   "taches": [
-    { "id": 1, "titre": "Faire le TP", "statut": "en_attente" },
-    { "id": 2, "titre": "Réviser Angular", "statut": "terminee" },
-    { "id": 3, "titre": "Préparer la présentation", "statut": "en_attente" },
-    { "id": 4, "titre": "Tester l'application", "statut": "en_cours" }
+    { "id": 1, "titre": "Faire le TP", "statut": "en_attente", "termine": false },
+    { "id": 2, "titre": "Réviser Angular", "statut": "terminee", "termine": false },
+    { "id": 3, "titre": "Préparer la présentation", "statut": "en_attente", "termine": false },
+    { "id": 4, "titre": "Tester l'application", "statut": "en_cours", "termine": false }
   ]
 }
 ```
